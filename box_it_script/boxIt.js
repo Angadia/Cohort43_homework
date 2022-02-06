@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const CENTERED_H_LINE = String.fromCharCode(0x2500);
 const CENTERED_V_LINE = String.fromCharCode(0x2502);
 const TOP_LEFT_CORNER = String.fromCharCode(0x250c);
