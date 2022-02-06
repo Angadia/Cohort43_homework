@@ -30,24 +30,65 @@ class Turtle {
   print() {
     let lowestX = this.pointsVisited
       .map((el) => el)
-      .reduce((min, cur) => Math.min(min, cur[0]), 0);
+      .reduce((min, cur) => Math.min(min, cur[0]), +Infinity);
     let lowestY = this.pointsVisited
       .map((el) => el)
-      .reduce((min, cur) => Math.min(min, cur[1]), 0);
+      .reduce((min, cur) => Math.min(min, cur[1]), +Infinity);
     let highestX = this.pointsVisited
       .map((el) => el)
-      .reduce((max, cur) => Math.max(max, cur[0]), 0);
+      .reduce((max, cur) => Math.max(max, cur[0]), -Infinity);
     let highestY = this.pointsVisited
       .map((el) => el)
-      .reduce((max, cur) => Math.max(max, cur[1]), 0);
+      .reduce((max, cur) => Math.max(max, cur[1]), -Infinity);
     for (let y = lowestY, row = ""; y <= highestY; y++, row = "") {
-      for (let x = lowestX, status = "="; x <= highestX; x++, status = "=") {
+      for (let x = lowestX, status = " "; x <= highestX; x++, status = " ") {
         this.pointsVisited.forEach((point) => {
-          if (point[0] == x && point[1] == y) status = "+";
+          if (point[0] == x && point[1] == y) status = "*";
         });
         row += status;
       }
       console.log(row);
     }
   }
+}
+
+function processTurtleCmds(cmds, turtle) {
+  cmds.forEach((cmd) => {
+    if (!cmd.startsWith("f") && !cmd.startsWith("r") && !cmd.startsWith("l")) {
+      console.log(`Skipping unrecognized cmd \'${cmd}\'.`);
+    } else {
+      if (cmd.startsWith("f")) {
+        turtle.forward(parseInt(cmd.slice(1)));
+      } else if (cmd.startsWith("r")) {
+        turtle.right();
+      } else {
+        turtle.left();
+      }
+    }
+  });
+}
+
+if (process.argv.length < 4) {
+  const cmds = process.argv[2].split("-");
+  let flash;
+  if (cmds.length == 0) {
+    flash = new Turtle(0, 0);
+  } else if (!cmds[0].startsWith("t")) {
+    flash = new Turtle(0, 0);
+  } else {
+    cmd = cmds.shift();
+    point = cmd.slice(1).split(",");
+    if (
+      point.length != 2 ||
+      !parseInt(point[0], 10) ||
+      !parseInt(point[1], 10)
+    ) {
+      console.log("Please provide commands in required format.");
+      return;
+    } else {
+      flash = new Turtle(parseInt(point[0], 10), parseInt(point[1], 10));
+    }
+  }
+  processTurtleCmds(cmds, flash);
+  flash.print();
 }
