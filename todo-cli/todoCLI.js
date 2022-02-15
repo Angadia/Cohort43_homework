@@ -39,6 +39,24 @@ function todoDelete(n) {
   console.log(`\nDeleted \"${todoList.splice(n, 1)[0].title}\"\n`);
 }
 
+function todoSave() {
+  console.log("\nWhere? (myTodos.json)");
+  rl.question("> ", (answer) => {
+    let outputFileName = answer.toString().trim();
+    if (outputFileName.length == 0) {
+      outputFileName = "myTodos.json";
+    }
+    fs.writeFile(outputFileName, JSON.stringify(todoList), (err) => {
+      if (!err) {
+        console.log(`\nList saved to \"${outputFileName}\"\n`);
+      } else {
+        console.log(`\n"${err.message}"\n`);
+      }
+      todoMenu();
+    });
+  });
+}
+
 function todoQuit() {
   console.log("\nSee you soon! 😄");
   rl.close();
@@ -54,7 +72,9 @@ function isValidTodoIndex(ansNum) {
 }
 
 function todoMenu() {
-  console.log("(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit");
+  console.log(
+    "(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit"
+  );
 
   rl.question("> ", (answer) => {
     if (answer == "v") {
@@ -74,6 +94,8 @@ function todoMenu() {
     ) {
       todoDelete(parseInt(answer.toString().slice(1), 10));
       todoMenu();
+    } else if (answer == "s") {
+      todoSave();
     } else if (answer == "q") {
       todoQuit();
     } else {
