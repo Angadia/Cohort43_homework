@@ -5,14 +5,17 @@
     <article class="card mb-3">
       <div class="card-body">
         <div class="card-title d-flex">
-          <img
-            src="<%- cohort.logo_url %>"
-            alt="Logo URL"
-            width="40px"
-            height="40px"
-            class="rounded-circle d-inline"
-          />
-          <h1 class="px-1"><%- cohort.name %></h1>
+          <% if (cohort.logo_url) { %>
+            <img
+              src="<%- cohort.logo_url %>"
+              width="40px"
+              height="40px"
+              class="rounded-circle d-inline"
+              />           
+              <h1 class="px-1"><%- cohort.name %></h1>
+          <% } else { %>
+            <h1><%- cohort.name %></h1>
+          <% } %>
         </div>
         <p class="card-text"><%- cohort.members %></p>
         <a href="/cohorts/<%- cohort.id %>" class="btn btn-primary" role="button">Show Cohort</a>
