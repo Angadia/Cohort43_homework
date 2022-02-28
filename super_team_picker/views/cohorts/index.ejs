@@ -4,15 +4,15 @@
     <% cohorts.forEach(cohort => { %>
     <article class="card mb-3">
       <div class="card-body">
-        <div class="card-title d-flex">
+        <div class="card-title d-flex align-items-center">
           <% if (cohort.logo_url) { %>
             <img
               src="<%- cohort.logo_url %>"
-              width="40px"
-              height="40px"
-              class="rounded-circle d-inline"
-              />           
-              <h1 class="px-1"><%- cohort.name %></h1>
+              width="35px"
+              height="35px"
+              class="rounded-circle"
+            />           
+            <h1 class="px-1"><%- cohort.name %></h1>
           <% } else { %>
             <h1><%- cohort.name %></h1>
           <% } %>
