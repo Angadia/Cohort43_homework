@@ -1,18 +1,7 @@
 <%- include("../partials/header") %> 
 <main class="px-3">
   <form action="/cohorts/new" method="POST">
-    <div class="form-group">
-      <label for="logo_url" class="mb-1">Logo Url</label>
-      <input type="url" class="form-control mb-3" name="logo_url" placeholder="e.g. https://www.example.com/some.png">
-    </div>
-    <div class="form-group">
-      <label for="name" class="mb-1">Name</label>
-      <input type="text" class="form-control mb-3" name="name" placeholder="Flying Funks">
-    </div>
-    <div class="form-group">
-      <label for="members" class="mb-1">Members</label>
-      <textarea class="form-control mb-3" name="members" rows="3" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"></textarea>
-    </div>
+    <%- include("../partials/formInput") %>
     <button type="submit" class="btn btn-outline-primary" style="float: right;">Submit</button>
   </form>
 </main>

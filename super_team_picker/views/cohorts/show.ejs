@@ -7,6 +7,13 @@
           <h1><%- cohort.name %></h1>
         </div>
         <p class="card-text"><%- cohort.members %></p>
+        <div class="d-flex">
+          <a href="/cohorts/<%- cohort.id %>/edit" class="btn btn-outline-primary" role="button">Edit</a>
+          <form action="/cohorts/<%- cohort.id %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-outline-danger mx-1">Delete</button>
+          </form>
+        </div>
       </div>
     </article>
   <% } else { %>
@@ -15,3 +22,5 @@
   </div>
   <% }; %></main>
 <%- include("../partials/footer") %>
+
+
