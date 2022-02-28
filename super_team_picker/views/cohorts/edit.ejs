@@ -1,0 +1,11 @@
+<%- include("../partials/header") %> 
+<main class="px-3">
+  <form action="/cohorts/<%- cohort.id %>" method="POST">
+    <input type="hidden" name="_method" value="PATCH">
+    <%- include("../partials/formInput") %>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-outline-primary">Update</button>
+    </div>
+  </form>
+</main>
+<%- include("../partials/footer") %>

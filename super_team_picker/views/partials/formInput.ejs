@@ -1,0 +1,12 @@
+<div class="form-group">
+  <label for="logo_url" class="mb-1">Logo Url</label>
+  <input type="url" class="form-control mb-3" name="logo_url" placeholder="e.g. https://www.example.com/some.png" value="<%- cohort ? cohort.logo_url : '' %>">
+</div>
+<div class="form-group">
+  <label for="name" class="mb-1">Name</label>
+  <input type="text" class="form-control mb-3" name="name" placeholder="Flying Funks" value="<%- cohort ? cohort.name : '' %>">
+</div>
+<div class="form-group">
+  <label for="members" class="mb-1">Members</label>
+  <textarea class="form-control mb-3" name="members" rows="3" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"><%- cohort ? cohort.members : '' %></textarea>
+</div>

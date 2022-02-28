@@ -1,0 +1,10 @@
+<%- include("../partials/header") %> 
+<main class="px-3">
+  <form action="/cohorts/new" method="POST">
+    <%- include("../partials/formInput") %>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </div>
+  </form>
+</main>
+<%- include("../partials/footer") %>

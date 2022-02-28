@@ -1,0 +1,44 @@
+<% if (cohort.members.length > 0) { %>
+  <div class="border my-3"></div>
+  <div class="assign_teams form-group">
+    <form action="/cohorts/<%= cohort.id %>" method="GET">
+      <label><strong>Method</strong></label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="method" id="method_team_count" value="team_count"
+        <% if (method && method == "team_count") { %> checked="true"<% }; %>>
+        <label class="form-check-label" for="method_team_count">Team Count</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="method" id="method_number_per_team" value="number_per_team"
+        <% if (method && method == "number_per_team") { %> checked="true"<% }; %>>
+        <label class="form-check-label" for="method_number_per_team">Number Per Team</label>
+      </div>
+      <div class="form-group">
+          <label class="form-control-label mt-3" for="assign_teams_quantity"><strong>Quantity</strong></label>
+        <input type="text" class="form-control mt-2" name="quantity" id="assign_teams_quantity"
+        <% if (quantity) { %> value="<%= quantity %>"<% }; %>>
+      </div>
+      <button type="submit" class="form-control btn btn-outline-primary mt-3"><h5>Assign Teams</h5></button>
+    </form>
+  </div>
+<% }; %>
+<% if (teams && teams.length > 0) { %>
+<table class="table table-hover table-borderless mt-1">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Members</th>
+    </tr>
+    <tr class="border my-3"></tr>
+  </thead>
+  <tbody>
+    <% for (let i = 0; i < teams.length; i++) { %>
+    <tr class="border my-3"></tr>
+    <tr>
+      <th scope="row"><%= i+1 %></td>
+      <td><%= teams[i] %></td>
+    </tr>
+    <% }; %>
+  </tbody>
+</table>
+<% }; %>
