@@ -3,7 +3,9 @@
   <form action="/cohorts/<%- cohort.id %>" method="POST">
     <input type="hidden" name="_method" value="PATCH">
     <%- include("../partials/formInput") %>
-    <button type="submit" class="btn btn-outline-primary" style="float: right;">Update</button>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-outline-primary">Update</button>
+    </div>
   </form>
 </main>
 <%- include("../partials/footer") %>
