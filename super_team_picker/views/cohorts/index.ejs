@@ -1,0 +1,29 @@
+<%- include("../partials/header") %>
+<main class="px-3">
+  <% if (cohorts && cohorts.length > 0) { %>
+    <% cohorts.forEach(cohort => { %>
+    <article class="card mb-3">
+      <div class="card-body">
+        <div class="card-title d-flex">
+          <img
+            src="<%- cohort.logo_url %>"
+            alt="Logo URL"
+            width="40px"
+            height="40px"
+            class="rounded-circle d-inline"
+          />
+          <h1 class="px-1"><%- cohort.name %></h1>
+        </div>
+        <p class="card-text"><%- cohort.members %></p>
+        <a href="/cohorts/<%- cohort.id %>" class="btn btn-primary" role="button">Show Cohort</a>
+      </div>
+    </article>
+    <% }); %>
+  <% } else { %>
+  <div class="no_cohort_message">
+    <h4>Sorry, no cohort to list. Please create a new Cohort.</h4>
+  </div>
+  <% }; %>
+</main>
+<%- include("../partials/footer") %>
+

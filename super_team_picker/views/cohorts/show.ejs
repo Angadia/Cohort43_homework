@@ -1,0 +1,17 @@
+<%- include("../partials/header") %>
+<main class="px-3">
+  <% if (cohort) { %>
+    <article class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <h1><%- cohort.name %></h1>
+        </div>
+        <p class="card-text"><%- cohort.members %></p>
+      </div>
+    </article>
+  <% } else { %>
+  <div class="no_cohort_message">
+    <h4>Sorry, cohort <%- id %> not found.</h4>
+  </div>
+  <% }; %></main>
+<%- include("../partials/footer") %>
