@@ -5,3 +5,24 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# Destroy all records from table posts.
+Post.destroy_all
+
+# Reset the primary key sequence to 1.
+ActiveRecord::Base.connection.reset_pk_sequence!(:posts)
+
+# Bulk insert of 50 fake posts.
+Post.insert_all(
+  50.times.map do
+    {
+      title: Faker::Hacker.say_something_smart,
+      body: Faker::ChuckNorris.fact,
+      created_at: Faker::Time.backward(days: 365),
+      updated_at: DateTime.now
+    }
+  end
+)
+
+# Show how many fake posts are in the table posts.
+puts Cowsay.say("Generated #{Post.count} posts using Faker.", :frogs)
