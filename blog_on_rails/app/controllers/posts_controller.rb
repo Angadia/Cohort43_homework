@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.all.order(created_at: :DESC)
+    @posts = Post.order(created_at: :DESC)
   end
 
   def new
@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new posts_params
+    @post = Post.new post_params
     if @post.save
       redirect_to post_path(@post), status: 303
     else
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def update
-    if @post.update posts_params
+    if @post.update post_params
       redirect_to post_path(@post), status: 303
     else
       render :edit
@@ -38,10 +38,10 @@ class PostsController < ApplicationController
   private
 
   def find_post
-    @post = Post.find params[:id]
+    @post = Post.find(params[:id])
   end
 
-  def posts_params
+  def post_params
     params.require(:post).permit(:title, :body)
   end
 end

@@ -1,9 +1,11 @@
 .navbar {
   justify-content: space-between;
   font-weight: 400;
+  padding: 1em;
 }
 
-.main {
+.main .card-deck,
+.main > form {
   padding: 1em 0.75em;
 }
 
@@ -17,8 +19,12 @@
   width: 100%;
 }
 
+.card-link {
+  text-decoration: none;
+}
+
 .posts .card-title {
-  font-weight: 500;
+  font-weight: 600;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -33,8 +39,32 @@
 }
 
 // New/Edit Post form
+input[type="text"] {
+  margin-bottom: 1em;
+}
+
 input[type="submit"] {
   margin-top: 1em;
+}
+
+p.field_with_errors {
+  color: red;
+}
+
+.post label {
+  margin-top: 1em;
+}
+
+.comments .card {
+  margin-top: 1em;
+}
+
+.comments .card-body {
+  padding: 0;
+}
+
+.comments .card-text {
+  margin-bottom: 0;
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -57,13 +87,13 @@ input[type="submit"] {
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .card-deck {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .card-deck {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }

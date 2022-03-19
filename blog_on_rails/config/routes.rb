@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   root 'posts#index'
-  resources :posts, except: [:index]
+  resources :posts, except: [:index] do
+    resources :comments, shallow: true, only: %i[create destroy]
+  end
 end

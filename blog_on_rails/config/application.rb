@@ -33,5 +33,12 @@ module BlogOnRails
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.generators do |g|
+      # Don't create helper files, instead of --no-helper
+      g.helper = false
+      # Don't create js and css files, instead of --no-assets
+      g.assets = false
+    end
   end
 end

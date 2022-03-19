@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  has_many :comments, -> { order(created_at: :DESC) }, dependent: :destroy
+
   # Title is required and unique
   validates :title, presence: true, uniqueness: true
 
