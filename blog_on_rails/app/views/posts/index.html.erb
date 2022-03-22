@@ -1,0 +1,12 @@
+        <%= tag.posts class: %w( posts card-deck ) do %>
+          <% @posts.each do |post| %>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">
+                  <h4><%= link_to post.title, post_path(post.id), class: "card-link" %></h4>
+                </div>
+                <p class="card-text"><%= post.body %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
