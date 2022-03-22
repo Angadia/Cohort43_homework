@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post), status: 303
     else
-      render :new
+      render :new, status: 303
     end
   end
 
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     if @post.update post_params
       redirect_to post_path(@post), status: 303
     else
-      render :edit
+      render :edit, status: 303
     end
   end
 

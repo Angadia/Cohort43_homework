@@ -3,7 +3,7 @@
     <h5><%= form.label :title %></h5>
     <%= form.text_field :title, value: @post.title, class: "form-control", required: "required" %>
     <% if @post&.errors&.where(:title)&.last&.type == :taken %>
-      <p class="field_with_errors"><%= @post.errors.full_messages_for(:title) %></p>
+      <p class="field_with_errors"><%= @post.errors.full_messages_for(:title).join(', ') %></p>
     <% end %>
   </div>
   <div class="form_group">
