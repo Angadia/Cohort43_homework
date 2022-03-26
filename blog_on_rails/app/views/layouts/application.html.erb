@@ -18,7 +18,7 @@
         <%= content_tag :ul, class: "navbar-nav" do %>
           <% if user_signed_in? %>
             <%= content_tag :li, class: "nav-item" do %>
-              <%= link_to current_user.name, root_path, class: "nav-link" %>
+              <%= link_to current_user.name, edit_user_path(current_user), class: "nav-link" %>
             <% end %>
             <%= content_tag :li, class: "nav-item" do %>
               <%= link_to "Sign Out", session_path, data: { turbo_method: :delete }, class: "nav-link" %>

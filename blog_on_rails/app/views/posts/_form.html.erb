@@ -1,14 +1,14 @@
 <%= form_with model: @post do |form| %>
   <div class="form-group">
     <h5><%= form.label :title %></h5>
-    <%= form.text_field :title, value: @post.title, class: "form-control", required: "required" %>
+    <%= form.text_field :title, class: "form-control", required: "required" %>
     <% if @post&.errors&.where(:title)&.last&.type == :taken %>
       <p class="field_with_errors"><%= @post.errors.full_messages_for(:title).join(', ') %></p>
     <% end %>
   </div>
   <div class="form_group">
     <h5><%= form.label :body %></h5>
-    <%= form.text_area :body, cols: 50, rows: 5, minLength: 50, value: @post.body, class: "form-control", required: "required" %>
+    <%= form.text_area :body, cols: 50, rows: 5, minLength: 50, class: "form-control", required: "required" %>
   </div>
   <%= form.submit class: "btn btn-outline-primary btn-lg" %>
 <% end %>
