@@ -1,13 +1,22 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
-    @comment = Comment.new({ body: params[:body], post_id: params[:post_id] })
-    @comment.save
-    redirect_to post_path(params[:post_id]), status: 303
+    @post = Post.find params[:post_id]
+    @comment = Comment.new params.require(:comment).permit(:body)
+    @comment.user = current_user
+    @comment.post = @post
+    if @comment.save
+      redirect_to post_path(@post), status: 303
+    else
+      @comments = @post.comments.order(created_at: :desc)
+      render 'posts/show', status: 303
+    end
   end
 
   def destroy
     @comment = Comment.find params[:id]
     @comment.destroy
-    redirect_to post_path(@comment.post_id), status: 303
+    redirect_to post_path(@comment.post), status: 303
   end
 end

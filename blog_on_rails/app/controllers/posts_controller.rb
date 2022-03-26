@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
@@ -11,20 +12,24 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new post_params
+    @post.user = current_user
     if @post.save
-      redirect_to post_path(@post), status: 303
+      redirect_to post_path(@post), { status: 303, notice: 'Post created successfully' }
     else
       render :new, status: 303
     end
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+    @comments = @post.comments.order(created_at: :desc)
+  end
 
   def edit; end
 
   def update
     if @post.update post_params
-      redirect_to post_path(@post), status: 303
+      redirect_to post_path(@post), { status: 303, notice: 'Post updated successfully' }
     else
       render :edit, status: 303
     end
@@ -32,7 +37,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to root_path, status: 303
+    redirect_to root_path, { status: 303, notice: 'Post deleted successfully' }
   end
 
   private
