@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  belongs_to :user
   has_many :comments, -> { order(created_at: :DESC) }, dependent: :destroy
 
   # Title is required and unique
