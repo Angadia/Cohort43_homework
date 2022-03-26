@@ -2,9 +2,11 @@
           <div class="card-body">
             <h1 class="card-title"><%= @post.title %></h1>
             <p class="card-text"><%= @post.body %></p>
-            <small><p>Posted <%= time_ago_in_words(@post.updated_at) %> ago | By <%= @post.user.name %></p></small>
-            <%= link_to("Edit", edit_post_path(@post), class: "btn btn-outline-primary btn-md") %>
-            <%= link_to("Delete", post_path(@post), data: { turbo_method: :delete }, class: "btn btn-outline-primary btn-md") %>
+            <small class="text-muted"><p>Posted <%= time_ago_in_words(@post.updated_at) %> ago | By <%= @post.user&.name || "DELETED" %></p></small>
+            <% if can? :crud, @post %>
+              <%= link_to("Edit", edit_post_path(@post), class: "btn btn-outline-primary btn-md") %>
+              <%= link_to("Delete", post_path(@post), data: { turbo_method: :delete }, class: "btn btn-outline-primary btn-md") %>
+            <% end %>
 
             <%= form_with model: [@post, @comment] do |form| %>
               <% if @comment.errors.present? %>
@@ -24,9 +26,11 @@
                 <div class="card border-0">
                   <div class="card-body">
                     <p class="card-text"><%= comment.body %></p>
-                    <small>Commented <%= time_ago_in_words(comment.created_at) %> ago | By <%= comment.user.name %></small>
-                    •
-                    <%= link_to("Delete", comment_path(comment), data: { turbo_method: :delete }, class: "card-link") %>
+                    <small class="text-muted">Commented <%= time_ago_in_words(comment.created_at) %> ago | By <%= comment.user&.name || "DELETED" %>
+                    <% if can? :destroy, comment %>
+                      •
+                      <%= link_to("Delete", comment_path(comment), data: { turbo_method: :delete }, class: "card-link") %>
+                    <% end %></small>
                   </div>
                 </div>
               <% end %>

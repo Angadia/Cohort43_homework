@@ -5,7 +5,9 @@
                 <div class="card-title">
                   <h4><%= link_to post.title, post_path(post.id), class: "card-link" %></h4>
                 </div>
-                <p class="card-text"><%= post.body %></p>
+                <div class="card-text"><%= post.body %><br>
+                  <small class="text-muted">By <%= post.user&.name || "DELETED" %></small>
+                </div>
               </div>
             </div>
           <% end %>

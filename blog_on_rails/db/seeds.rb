@@ -19,6 +19,14 @@ ActiveRecord::Base.connection.reset_pk_sequence!(:posts)
 ActiveRecord::Base.connection.reset_pk_sequence!(:comments)
 ActiveRecord::Base.connection.reset_pk_sequence!(:users)
 
+super_user = User.create( 
+  name: "Admin", 
+  email: "admin@user.io", 
+  password: PASSWORD,
+  is_admin: true
+)
+puts Cowsay.say("Admin login with #{super_user.email} and password of '#{PASSWORD}'", :cow)
+
 5.times do |n|
   User.create(
     name: Faker::Name.first_name,
@@ -27,7 +35,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!(:users)
   )
 end
 
-users = User.all
+users = User.all.where(is_admin: false)
 
 puts Cowsay.say("Created #{users.count} users", :tux)
 puts Cowsay.say("Users email are #{(users.map(&:email)).join(', ')}", :kitty)

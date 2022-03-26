@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update edit_password update_password]
   before_action :find_user, only: %i[edit update edit_password update_password]
+  before_action :authorize_user!, only: %i[edit update edit_password update_password]
 
   def new
     @user = User.new
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
 
   def update
     if @user&.update user_params.except(:password, :password_confirmation)
-      redirect_to root_path, status: 303
+      redirect_to root_path, { status: 303, notice: 'User profile updated successfully' }
     else
       render :edit, status: 303
     end
@@ -65,5 +66,9 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation
     )
+  end
+
+  def authorize_user!
+    redirect_to root_path, { status: 303, alert: 'Not authorized' } unless can? :crud, @user
   end
 end
