@@ -1,23 +1,23 @@
-      <h1>Sign Up</h1>
+      <h1 class="m-2">Sign Up</h1>
 
       <%= form_with model: @user do |f| %>
         <div class="form-group">
-          <%= f.label :name %>
+          <h5><%= f.label :name %></h5>
           <%= f.text_field :name, class: "form-control", required: :required %>
         </div>
         <div class="form-group">
-          <%= f.label :email %>
+          <h5><%= f.label :email %></h5>
           <%= f.email_field :email, class: "form-control", required: :required %>
           <% if @user&.errors&.where(:email) %>
             <p class="field_with_errors"><%= @user.errors.full_messages_for(:email).join(', ') %></p>
           <% end %>
         </div>
         <div class="form-group">
-          <%= f.label :password %>
+          <h5><%= f.label :password %></h5>
           <%= f.password_field :password, class: "form-control", required: :required %>
         </div>
         <div class="form-group">
-          <%= f.label :password_confirmation %>
+          <h5><%= f.label :password_confirmation %></h5>
           <%= f.password_field :password_confirmation, class: "form-control", required: :required %>
         </div>
           <% if @user&.errors&.where(:password_confirmation) %>

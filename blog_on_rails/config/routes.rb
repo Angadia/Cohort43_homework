@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :comments, shallow: true, only: %i[create destroy]
   end
 
+  get '/password', to: 'users#edit_password', as: 'edit_password'
+  post '/password', to: 'users#update_password', as: 'update_password'
   resources :users, only: %i[new create edit update]
   resource :session, only: %i[new create destroy]
 end

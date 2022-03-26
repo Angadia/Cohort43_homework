@@ -1,11 +1,12 @@
-      <h1>Sign In</h1>
+      <h1 class="m-2">Sign In</h1>
       <%= form_tag session_path do %>
         <div class="form-group">
-          <%= label_tag :email %>
+          <h5><%= label_tag :email %></h5>
           <%= email_field_tag :email, nil, class: "form-control" %>
         </div>
+        <br>
         <div class="form-group">
-          <%= label_tag :password %>
+          <h5><%= label_tag :password %></h5>
           <%= password_field_tag :password, nil, class: "form-control" %>
         </div>
         <div>
