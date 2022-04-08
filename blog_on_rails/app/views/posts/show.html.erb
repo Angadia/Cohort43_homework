@@ -1,0 +1,40 @@
+        <div class="post card border-0">
+          <div class="card-body">
+            <h1 class="card-title"><%= @post.title %></h1>
+            <p class="card-text"><%= @post.body %></p>
+            <small class="text-muted"><p>Posted <%= time_ago_in_words(@post.updated_at) %> ago | By <%= @post.user&.name || "DELETED" %></p></small>
+            <% if can? :crud, @post %>
+              <%= link_to("Edit", edit_post_path(@post), class: "btn btn-outline-primary btn-md") %>
+              <%= link_to("Delete", post_path(@post), data: { turbo_method: :delete }, class: "btn btn-outline-primary btn-md") %>
+            <% end %>
+
+            <%= form_with model: [@post, @comment] do |form| %>
+              <% if @comment.errors.present? %>
+                <p class="form-errors">
+                  <%= @comment.errors.full_messages.join(", ") %>
+                </p>
+              <% end %>
+              <div class="form_group">
+                <h5><%= form.label :comment, for: :body %></h5>
+                <%= form.text_area :body, cols: 50, rows: 3, placeholder: "What's on your mind?", class: "form-control", required: "required" %>
+              </div>
+              <%= form.submit "Submit", class: "btn btn-outline-primary btn-lg" %>
+            <% end %>
+
+            <%= tag.comments class: %w( comments ) do %>
+              <% @post.comments.each do |comment| %>
+                <div class="card border-0">
+                  <div class="card-body">
+                    <p class="card-text"><%= comment.body %></p>
+                    <small class="text-muted">Commented <%= time_ago_in_words(comment.created_at) %> ago | By <%= comment.user&.name || "DELETED" %>
+                    <% if can? :destroy, comment %>
+                      •
+                      <%= link_to("Delete", comment_path(comment), data: { turbo_method: :delete }, class: "card-link") %>
+                    <% end %></small>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
+          </div>
+        </div>

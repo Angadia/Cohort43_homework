@@ -1,0 +1,14 @@
+        <%= tag.posts class: %w( posts card-deck ) do %>
+          <% @posts.each do |post| %>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">
+                  <h4><%= link_to post.title, post_path(post.id), class: "card-link" %></h4>
+                </div>
+                <div class="card-text"><%= post.body %><br>
+                  <small class="text-muted">By <%= post.user&.name || "DELETED" %></small>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
