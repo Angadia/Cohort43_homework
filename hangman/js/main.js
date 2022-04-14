@@ -1,12 +1,13 @@
 $(document).ready(() => {
-  const mysteryWord = "STRANGER";
+  const words = ["ROCK", "PAPER", "SCISSORS"];
+  const mysteryWord = words[Math.floor(Math.random() * words.length)];
   const MAX_TRIES = 6;
-
-  let fails = 0;
-  let matches = 0;
 
   const applauseSound = new Audio("sounds/applause3.wav");
   const bombSound = new Audio("sounds/bomb_x.wav");
+
+  let fails = 0;
+  let matches = 0;
 
   for (let i = 0; i < mysteryWord.length; i++) {
     $("table.mysteryWord tr").append($(`<td></td>`));
