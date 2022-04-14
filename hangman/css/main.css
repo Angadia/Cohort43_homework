@@ -1,0 +1,44 @@
+table.alphabets {
+  border-collapse: separate;
+  border-spacing: 0.3em;
+}
+
+table.mysteryWord {
+  padding: 1em 0 1em 3em;
+  border-spacing: 0.5em;
+}
+
+img {
+  padding-left: 50px;
+  height: 500px;
+  width: auto;
+}
+
+table.mysteryWord tr {
+  height: 2.5em;
+}
+
+table.alphabets td {
+  width: 1.3em;
+  text-align: center;
+  padding: 0.2em;
+  font-size: 1.5em;
+  border: 1px solid grey;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+table.mysteryWord td {
+  width: 1.5em;
+  padding: 0.2em;
+  text-align: center;
+  font-size: 1.5em;
+  border-bottom: 2px solid grey;
+  cursor: none;
+}
+
+table.alphabets td.selected {
+  border: 1px solid white;
+  color: white;
+  background-color: orangered;
+}
