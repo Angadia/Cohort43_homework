@@ -5,6 +5,7 @@ $(document).ready(() => {
 
   const applauseSound = new Audio("sounds/applause3.wav");
   const bombSound = new Audio("sounds/bomb_x.wav");
+  const bounceSound = new Audio("sounds/beep-03.mp3");
 
   let fails = 0;
   let matches = 0;
@@ -49,9 +50,38 @@ $(document).ready(() => {
     }
   }
 
+  function checkTheAlphabet(alphabet) {
+    if (alphabet.hasClass("selected")) {
+      bounceSound.play();
+    } else {
+      alphabet.addClass("selected");
+      checkTheGuess(alphabet.text());
+    }
+  }
+
   $("table.alphabets td").on("click", (e) => {
-    const currentTarget = $(e.currentTarget);
-    currentTarget.addClass("selected");
-    checkTheGuess(currentTarget.text());
+    checkTheAlphabet($(e.currentTarget));
+  });
+
+  function findTheAlphabet(guessCharCode) {
+    const charCodeForA = 65;
+    return $(
+      `table.alphabets tr:nth-child(
+        ${Math.floor((guessCharCode - charCodeForA) / 10) + 1}
+      ) > td:nth-child(${((guessCharCode - charCodeForA) % 10) + 1})`
+    );
+  }
+
+  function updateTheAlphabet(guess) {
+    const guessCharCode = guess.charCodeAt(0);
+    const alphabet = findTheAlphabet(guessCharCode);
+    checkTheAlphabet(alphabet);
+  }
+
+  $(document).on("keypress", (e) => {
+    const guess = e.key.toUpperCase().charAt(0);
+    if (guess >= "A" && guess <= "Z") {
+      updateTheAlphabet(guess);
+    }
   });
 });
